@@ -49,7 +49,18 @@
     <tr>
       <th>URL:</th><td>{{ proj_item.URL_link }}</td>
     </tr>
+   
   </table>
-
+  <div>
+      <a href="/del_inv/{{ proj_item.project_id }}" class="btn btn-info" role="button" onclick="delProjItem()">Delete</a>
+  </div>
+  <div>
+      <a href="/upd_inv/{{ proj_item.project_id }}" class="btn btn-info" role="button">Update</a>
+  </div>
 </div>
+<script>
+function delProjItem() {
+  confirm("Are you sure you want to delete this project?");
+}
+</script>
 {% endblock %}

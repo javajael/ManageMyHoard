@@ -201,7 +201,7 @@ def create_inv():
     #add to session & commit
     # db.session.add(new_inv)
     # db.session.commit()
-    new_inf.save()
+    new_inv.save()
 
     flash(f"Inventory Item: {inv_name} added.")
 
@@ -243,6 +243,49 @@ def view_inventory():
 
     
     return render_template('inventory.html', user=user, inventory=inventory)
+
+@app.route('/del_inv/<int:inv_id>')
+def delete_inventory(inv_id):
+    """Method to delete an inventory item from the database"""
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+
+    inv_item = Inventory.query.get(inv_id)
+    #inv_item = Inventory.query.filter(int(inv_id))
+
+    #get info from the db on the item
+    # and run the query to delete it
+    db.session.delete(inv_item)
+
+    #Inventory.query.filter(inv_item.inv_id == inv_id).delete()
+
+    #commit change to the db
+    db.session.commit()
+    inventory = user.inventory
+    #send a flash confirmation message that the item was deleted
+    flash(f"Item {inv_id} deleted.")
+    #Take the user back to the inventory list page
+    return render_template('inventory.html', user=user, inventory=inventory)
+
+@app.route('/upd_inv/<int:inv_id>')
+def update_inventory(inv_id):
+    """Method to update an inventory item from the database"""
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+
+    inventory = user.inventory
+
+
+    #get info from the db on the item
+    inv_item = Inventory.query.get(inv_id)
+    # and run the query to update it
+
+    # flash update?
+
+    # Return the user to the individual item view page to review changes
+    return render_template("view_inv_item.html", inv_item=inv_item)
+
+
 
 @app.route('/add_proj_form')
 def add_proj_form():
@@ -309,6 +352,44 @@ def get_proj_item(project_id):
     #return that info to be displayed on the view_inv_item.html page
 
     return render_template("view_proj_item.html", proj_item=proj_item)
+
+@app.route('/del_proj/<int:project_id>')
+def delete_inventory(project_id):
+    """Method to delete an project from the database"""
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+
+    proj_item = Project.query.get(project_id)
+   
+
+    #get info from the db on the item
+    # and run the query to delete it
+    db.session.delete(proj_item)
+
+    #commit change to the db
+    db.session.commit()
+
+    projects = user.projects
+    #send a flash confirmation message that the item was deleted
+    flash(f"Item {project_id} deleted.")
+
+    #Take the user back to the inventory list page
+    return render_template('projects.html', user=user, projects=projects)
+
+@app.route('/upd_proj/<int:project_id>')
+def update_inventory(project_id):
+    """Method to update an inventory item from the database"""
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+
+    #get info from the db on the item
+    proj_item = Projects.query.get(project_id)
+    # and run the query to update it
+
+    # flash update?
+    flash(f"Item {project_id} updated.")
+    # Return the user to the individual item view page to review changes
+    return render_template("view_proj_item.html", inv_item=inv_item)
 
 @app.route('/search')
 def search():

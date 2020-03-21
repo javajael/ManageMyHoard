@@ -7,7 +7,7 @@
 <div class="container">
 
   <h2 class="indiv_inv_heading">Inventory Item</h2>
-
+<form>
   <table class="table table-hover">
     <tr>
         <th>ID:</th><td>{{ inv_item.inv_id }}</td>
@@ -31,6 +31,16 @@
       <th>Description:</th><td>{{ inv_item.description }}</td>
     </tr>
   </table>
-
+  <div>
+      <a href="/del_inv/{{ inv_item.inv_id }}" class="btn btn-info" role="button" onclick="delInvItem()">Delete</a>
+  </div>
+  <div>
+      <a href="/upd_inv/{{ inv_item.inv_id }}" class="btn btn-info" role="button">Update</a>
+  </div>
 </form>
+<script>
+function delInvItem() {
+  confirm("Are you sure you want to delete this item?");
+}
+</script>
 {% endblock %}
