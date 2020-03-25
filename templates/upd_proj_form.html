@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}
+Update Project
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h2 class="indiv_proj_heading">Project</h2>
+    <form class="upd_proj" action="/upd_proj/{{ proj_item.project_id }}" method="POST">
+        <div class="form-group">
+            <label for="proj-name-data">Name</label>
+            <input type="text"
+                   name="project_name"
+                   id="proj-name-data"
+                   value="{{ proj_item.project_name }}"
+                   required
+                   autofocus
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="proj-status-data">Status:</label>
+            <select name="status" 
+                    class="form-control"
+                    value="{{ proj_item.status }}">
+                <option value="q">Queued</option>
+                <option value="i">In Progress</option>
+                <option value="c">Complete</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description-data">Description:</label>
+            <textarea type="text"
+                      name="description"
+                      id="description-data"
+                      value="{{ proj_item.description }}"
+                      class="form-control">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="tool-list-data">Tools:</label>
+            <input type="text"
+                   name="tool_list"
+                   id="tool-list-data-data"
+                   placeholder="{{ proj_item.tool_list }}"
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="supply-list-data">Supplies:</label>
+            <input type="text"
+                   name="supply_list"
+                   id="suppl-list-data"
+                   placeholder="{{ proj_item.supply_list }}"
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="directions-data">Directions:</label>
+            <textarea type="text"
+                      name="directions"
+                      id="directions-data"
+                      value="{{ proj_item.directions }}"
+                      class="form-control">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="keywords-data">Keywords:</label>
+            <input type="text"
+                   name="keywords"
+                   id="keywords-data"
+                   placeholder="{{ proj_item.keywords }}"
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="URL-link-data">URL Link:</label>
+            <input type="text"
+                   name="URL_link"
+                   id="URL-link-data-data"
+                   placeholder="{{ proj_item.URL_link}}"
+                   class="form-control">
+        </div>
+
+    </form>
+</div>

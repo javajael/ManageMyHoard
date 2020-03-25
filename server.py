@@ -267,7 +267,13 @@ def delete_inventory(inv_id):
     #Take the user back to the inventory list page
     return render_template('inventory.html', user=user, inventory=inventory)
 
-@app.route('/upd_inv/<int:inv_id>')
+@app.route('/upd_inv_form/<int:inv_id>')
+def show_inv_update(inv_id):
+    inv_item = Inventory.query.get(inv_id)
+
+    return render_template('upd_inv_form.html',inv_item=inv_item)
+
+@app.route('/upd_inv/<int:inv_id>', methods=['POST'])
 def update_inventory(inv_id):
     """Method to update an inventory item from the database"""
     user_id = session['user_id']
@@ -278,9 +284,24 @@ def update_inventory(inv_id):
 
     #get info from the db on the item
     inv_item = Inventory.query.get(inv_id)
+
     # and run the query to update it
+    # NOTE TO SELF: will need to add picture path later
+    inv_item.inv_name = request.form['inv_name']
+    inv_item.description = request.form['description']
+    inv_item.price = request.form['price']
+    inv_item.count_per_package = request.form['count_per_package']
+    inv_item.manufacturer = request.form['manufacturer']
+    inv_item.size = request.form['size']
+    inv_item.keywords = request.form['keywords']
+    
+    
+
+    inv_item.save()
+    
 
     # flash update?
+    flash(f"Item {inv_id} updated.")
 
     # Return the user to the individual item view page to review changes
     return render_template("view_inv_item.html", inv_item=inv_item)
@@ -354,7 +375,7 @@ def get_proj_item(project_id):
     return render_template("view_proj_item.html", proj_item=proj_item)
 
 @app.route('/del_proj/<int:project_id>')
-def delete_inventory(project_id):
+def delete_project(project_id):
     """Method to delete an project from the database"""
     user_id = session['user_id']
     user = User.query.get(user_id)
@@ -377,14 +398,36 @@ def delete_inventory(project_id):
     return render_template('projects.html', user=user, projects=projects)
 
 @app.route('/upd_proj/<int:project_id>')
-def update_inventory(project_id):
+def update_project(project_id):
     """Method to update an inventory item from the database"""
     user_id = session['user_id']
     user = User.query.get(user_id)
 
     #get info from the db on the item
-    proj_item = Projects.query.get(project_id)
+    proj_item = Project.query.get(project_id)
+
     # and run the query to update it
+    proj_item.name = request.form.get('project_name')
+    proj_item.status=request.form.get('status')
+    proj_item.description=request.form.get('description')
+    proj_item.picture_path=request.form.get('picture_path')
+    proj_item.keywords=request.form.get('keywords')
+    proj_item.tool_list=request.form.get('tool_list')
+    proj_item.supply_list=request.form.get('supply_list')
+    proj_item.directions=request.form.get('directions')
+    proj_item.URL_link=request.form.get('URL_link')
+
+    # proj_item.name=request.form['project_name']
+    # proj_item.status=request.form['status']
+    # proj_item.description=request.form['description']
+    # proj_item.picture_path=request.form['picture_path']
+    # proj_item.keywords=request.form['keywords']
+    # proj_item.tool_list=request.form['tool_list']
+    # proj_item.supply_list=request.form['supply_list']
+    # proj_item.directions=request.form['directions']
+    # proj_item.URL_link=request.form['URL_link']
+
+    proj_item.save()
 
     # flash update?
     flash(f"Item {project_id} updated.")
