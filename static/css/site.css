@@ -4,11 +4,11 @@
 /* Style our MHH nav bar and logo. */
 
 /* Add a blue background color to the top navigation */
-div.topnav {
+/*div.topnav {
   background-color: #00cccc;
   overflow: hidden;
 }
-
+*/
 div.navbar-header img {
     width: 30px;
     float: left;
@@ -16,11 +16,15 @@ div.navbar-header img {
     margin-right: 7px;
 }
 
-img.MHH-logo {
+img.mmh-logo-xs {
     height: 15px;
 }
 
-img.MHH-logo-lg {
+img.mmh-logo-m {
+    height: 100px;
+}
+
+img.mmh-logo-lg {
     height: 150px;
 }
 

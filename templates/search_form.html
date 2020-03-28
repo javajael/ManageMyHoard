@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Update Project
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Search</h2>
+    <form class="search-form" action="search" method="POST">
+        <div class>
+        <input type="text"
+               name="search_text"
+               id="search_parms"
+               placeholder="Keywords to search"
+               autofocus
+               class="form-control">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

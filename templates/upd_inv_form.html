@@ -71,15 +71,14 @@ Update Inventory
         <input type="text"
                name="keywords"
                id="keywords-data"
-               placeholder="{{ inv_item.keywords }}"
+               value="{{ inv_item.keywords }}"
                class="form-control">
     </div>
     <div>
-        <button type="submit" class="btn btn-primary" onclick="updInvItem()">update</button>
+        <button type="submit" class="btn btn-primary" onclick="updInvItem()">Update</button>
     </div>      
-
-    </div>
-</form>
+  </form>
+</div>
 <script>
 function updInvItem() {
   confirm("Are you sure you want to update this item?");

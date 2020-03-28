@@ -149,6 +149,12 @@ def user_info(user_id):
     return render_template('user_profile.html', user=user, inventory=inventory,
                                              projects=projects)
 
+    # # Using JSON to return user profile information
+    # user = User.query.get(user_id)
+
+    # return jsonify([user.serialize()])
+
+
 
 @app.route('/user')
 def user():
@@ -358,6 +364,15 @@ def view_projects():
     """ Show all the projects for a particular user"""
     return render_template('projects.html',user=user, projects=projects)
 
+@app.route('/in_progress_projects.json')
+def show_ip_projects():
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    projects = user.get_ip_projects
+    print("*"*100)
+    print(projects)
+    return jsonify(projects)
+
 @app.route('/view_proj_item/<int:project_id>')
 def get_proj_item(project_id):
     """View an individual inv_item"""
@@ -397,54 +412,79 @@ def delete_project(project_id):
     #Take the user back to the inventory list page
     return render_template('projects.html', user=user, projects=projects)
 
-@app.route('/upd_proj/<int:project_id>')
+
+@app.route('/upd_proj_form/<int:project_id>')
+def show_proj_update(project_id):
+    
+    #get info from the db on the item
+    proj_item = Project.query.get(project_id)
+
+    return render_template('upd_proj_form.html',proj_item=proj_item)
+
+
+@app.route('/upd_proj/<int:project_id>', methods=['POST'])
 def update_project(project_id):
     """Method to update an inventory item from the database"""
     user_id = session['user_id']
     user = User.query.get(user_id)
 
+    app.logger.info(request.form)
+
     #get info from the db on the item
     proj_item = Project.query.get(project_id)
 
-    # and run the query to update it
-    proj_item.name = request.form.get('project_name')
-    proj_item.status=request.form.get('status')
-    proj_item.description=request.form.get('description')
-    proj_item.picture_path=request.form.get('picture_path')
-    proj_item.keywords=request.form.get('keywords')
-    proj_item.tool_list=request.form.get('tool_list')
-    proj_item.supply_list=request.form.get('supply_list')
-    proj_item.directions=request.form.get('directions')
-    proj_item.URL_link=request.form.get('URL_link')
+    # I know I should be using the request.form.get() to avoid Key Errors but 
+    # something wonky is happening with the fields when I do (not getting passed
+    # or saved?)
 
-    # proj_item.name=request.form['project_name']
-    # proj_item.status=request.form['status']
-    # proj_item.description=request.form['description']
-    # proj_item.picture_path=request.form['picture_path']
-    # proj_item.keywords=request.form['keywords']
-    # proj_item.tool_list=request.form['tool_list']
-    # proj_item.supply_list=request.form['supply_list']
-    # proj_item.directions=request.form['directions']
-    # proj_item.URL_link=request.form['URL_link']
+    # and run the query to update it
+    # proj_item.name = request.form.get('project_name')
+    # proj_item.status=request.form.get('status')
+    # proj_item.description=request.form.get('description')
+    # proj_item.picture_path=request.form.get('picture_path')
+    # proj_item.keywords=request.form.get('keywords')
+    # proj_item.tool_list=request.form.get('tool_list')
+    # proj_item.supply_list=request.form.get('supply_list')
+    # proj_item.directions=request.form.get('directions')
+    # proj_item.URL_link=request.form.get('URL_link')
+
+    app.logger.info(proj_item)
+
+    proj_item.name=request.form['project_name']
+    proj_item.status=request.form['status']
+    proj_item.description=request.form['description']
+    proj_item.picture_path=""
+    proj_item.keywords=request.form['keywords']
+    proj_item.tool_list=request.form['tool_list']
+    proj_item.supply_list=request.form['supply_list']
+    proj_item.directions=request.form['directions']
+    proj_item.URL_link=request.form['URL_link']
 
     proj_item.save()
 
     # flash update?
     flash(f"Item {project_id} updated.")
     # Return the user to the individual item view page to review changes
-    return render_template("view_proj_item.html", inv_item=inv_item)
+    return render_template("view_proj_item.html", proj_item=proj_item)
 
-@app.route('/search')
+@app.route('/search_form')
+def search_form():
+    """ display the search form"""
+    return render_template('search_form.html')
+
+
+@app.route('/search', methods=['POST'])
 def search():
     """ Search for specific tools/supplies, and View all of the tools 
     and supplies saved in the database- for the user that is logged in """
+    search_text = request.form.get('search_text')
+    print("request.form.get('search_text')= ", search_text)
+    user_id = session['user_id']
+    user = User.query.get(user_id) 
+    results = user.search_keywords(search_text)
+    print(results)
+
     return render_template('search.html')
-
-# @app.route('/user')
-# def user_profile():
-#     """ Show the profile information of the person logged in"""
-#     return render_template('user_profile.html')
-
 
 
 if __name__ == "__main__":

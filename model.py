@@ -28,9 +28,7 @@ class User(ModelMixin, db.Model):
     fname = db.Column(db.String(50), nullable = False)
     lname = db.Column(db.String(50), nullable = False)
 
-    # inventory = db.relationship("Inventory",
-    #                        backref=db.backref("inventory",
-    #                                           order_by=user_id))
+    
     projects = db.relationship("Project", backref=db.backref("projects",
                                order_by=user_id))
     inventory = db.relationship("Inventory", backref=db.backref("inventory",
@@ -43,6 +41,7 @@ class User(ModelMixin, db.Model):
                    password={self.password}
                    fname={self.name}
                    lname={self.name}>"""
+
     # def create_user():
     #     """ Method to take kwargs and create a user """
     #     user = User()
@@ -54,6 +53,29 @@ class User(ModelMixin, db.Model):
     def login(self, password):
         return check_password_hash(self.password, password)
 
+    def serialize(self):
+        return {
+            "user_id": self.user_id, "username": self.username,
+            "email": self.email, "password": self.password,
+            "fname": self.fname, "lname": self.lname
+        }
+    def get_ip_projects(self):
+        """Function to return the projects for a user that are in progress
+           ie. their status='i'
+        """
+        ip_projects = db.session.query(Project.project_id,
+                                           Project.user_id,
+                                           Project.proj_name,
+                                           Project.status,
+                                           Project.description).filter(Project.user_id == self.user_id)
+        return ip_projects
+
+    def search_keywords(self, search_parms):
+        search_on = "\'%"+search_parms+"%\'"
+        matches = db.session.query(Inventory.inv_id,
+                                   Inventory.inv_name,
+                                   Inventory.keywords).filter(Inventory.user_id == self.user_id and Inventory.keywords.like(search_on))
+    
 
 
 
@@ -91,6 +113,21 @@ class Inventory(ModelMixin, db.Model):
                     picture_path={self.picture_path}
                     keywords={self.keywords}
                     >"""
+    def serialize(self):
+        return {
+            "inv_id": self.inv_id,
+            "user_id": self.user_id,
+            "inv_name":self.name,
+            "inv_type": self.inv_type,
+            "description": self.descrption,
+            "price": self.price,
+            "count_per_package": self.count_per_package,
+            "manufacturer": self.manufacturer,
+            "size": self.size,
+            "picture_path": self.picture_path,
+            "keywords": self.keywords
+            
+        }
 
 
 class Project(ModelMixin, db.Model):
@@ -113,11 +150,6 @@ class Project(ModelMixin, db.Model):
     directions = db.Column(db.String(1500), nullable=True)
     URL_link = db.Column(db.String(300), nullable=True)
     
-    # Define relationship to user
-    # user = db.relationship("User",
-    #                        backref=db.backref("users",
-    #                                           order_by=user_id))
-    
 
     def __repr__(self):
         return f"""<Project project_id={self.project_id}
@@ -132,7 +164,25 @@ class Project(ModelMixin, db.Model):
                    directions={self.directions}
                    URL_link={self.URL_link}>"""
 
-
+    def serialize(self):
+        return {
+            "user_id": self.user_id,
+            "username": self.username,
+            "email": self.email,
+            "password": self.password,
+            "fname": self.fname,
+            "lname": self.lname,
+            "user_id":self.user_id,
+            "status":self.status,
+            "name":self.name,
+            "description": self.description,
+            "picture_path": self.picture_path,
+            "keywords": self.keywords,
+            "tool_list": self.tool_list,
+            "supply_list": self.supply_list,
+            "directions": self.directions,
+            "URL_link": self.URL_link
+        }
 
 
 ##############################################################################

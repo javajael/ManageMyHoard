@@ -3,12 +3,12 @@
 Profile
 {% endblock %}
 {% block body %}
-
-<form class="profile" method="POST">
+<script src="{{ url_for('static', filename='js/showProjects.js')}}"></script>
+<div class="profile">
 
   <h2 class="profile-heading">Profile</h2>
 
-  <div class="form-group">
+  <div class="form-group" id=user_profile>
    
    <div>
       <div>
@@ -21,24 +21,18 @@ Profile
         <p><b>Email:</b> {{ user.email }}</p>
       </div>
     </div>
-
-    <div class="containter">
-      <table class="table">
-        <tr>
-          <th>Projects</th>
-          <th>Status</th>
-          <th>Description</th>
-        </tr>
-        {% for project in projects %}
-        <tr>
-          <td>{{ project.name }}</td>
-          <td>{{ project.status }}</td>
-          <td>{{ project.description }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-    </div>
   </div>
+  
+</div>
+<div class="container">
+  <form class="ip_projects" method="POST">
+    <button type="submit" class="btn btn-primary" onclick="showProjects()">Show Projects In Progress</button>      
+    <div id="show-projects">
+    <!-- JS/AJAX should populate this div -->
+    </div>
+  </form>
+</div>
 
-</form>
+
+
 {% endblock %}

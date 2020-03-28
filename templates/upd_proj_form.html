@@ -11,7 +11,7 @@ Update Project
             <input type="text"
                    name="project_name"
                    id="proj-name-data"
-                   value="{{ proj_item.project_name }}"
+                   value="{{ proj_item.name }}"
                    required
                    autofocus
                    class="form-control">
@@ -40,7 +40,7 @@ Update Project
             <input type="text"
                    name="tool_list"
                    id="tool-list-data-data"
-                   placeholder="{{ proj_item.tool_list }}"
+                   value="{{ proj_item.tool_list }}"
                    class="form-control">
         </div>
         <div class="form-group">
@@ -48,7 +48,7 @@ Update Project
             <input type="text"
                    name="supply_list"
                    id="suppl-list-data"
-                   placeholder="{{ proj_item.supply_list }}"
+                   value="{{ proj_item.supply_list }}"
                    class="form-control">
         </div>
         <div class="form-group">
@@ -65,7 +65,7 @@ Update Project
             <input type="text"
                    name="keywords"
                    id="keywords-data"
-                   placeholder="{{ proj_item.keywords }}"
+                   value="{{ proj_item.keywords }}"
                    class="form-control">
         </div>
         <div class="form-group">
@@ -73,9 +73,17 @@ Update Project
             <input type="text"
                    name="URL_link"
                    id="URL-link-data-data"
-                   placeholder="{{ proj_item.URL_link}}"
+                   value="{{ proj_item.URL_link }}"
                    class="form-control">
         </div>
-
+      <div>
+        <button type="submit" class="btn btn-primary" onclick="upProjItem()">Update</button>
+      </div>  
     </form>
 </div>
+<script>
+function upProjItem() {
+  confirm("Are you sure you want to update this project?");
+}
+</script>
+{% endblock %}
