@@ -3,7 +3,9 @@
 Profile
 {% endblock %}
 {% block body %}
-<script src="{{ url_for('static', filename='js/showProjects.js')}}"></script>
+<!-- <script src="{{ url_for('static', filename='js/showProjects.js')}}"></script>
+ -->
+<script src="/static/js/getQuote.js"></script>
 <div class="profile">
 
   <h2 class="profile-heading">Profile</h2>
@@ -25,12 +27,18 @@ Profile
   
 </div>
 <div class="container">
-  <form class="ip_projects" method="POST">
-    <button type="submit" class="btn btn-primary" onclick="showProjects()">Show Projects In Progress</button>      
-    <div id="show-projects">
+  <!-- <form class="ip_projects"  method="POST">
+    <button type="submit" class="btn btn-primary" onclick="showProjects()">Show Projects In Progress</button>  -->     
+    <p>
+      <button id="get-quote-button" class="btn btn-primary">Get Quote</button>
+    </p>
+
+    
+    <div id="quote-text">
+      test
     <!-- JS/AJAX should populate this div -->
     </div>
-  </form>
+  <!-- </form> -->
 </div>
 
 
