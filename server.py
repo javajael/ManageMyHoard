@@ -5,6 +5,7 @@
 from flask import Flask, redirect, request, flash, render_template, jsonify, session
 from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
+import random
 from model import connect_to_db, db, User, Project, Inventory
 
 app = Flask(__name__)
@@ -24,7 +25,15 @@ app.jinja_env.auto_reload = True
 # Required to use Flask sessions and the debug toolbar
 #app.secret_key = 'ABC'
 
-
+QUOTES = [
+'<i>“Creativity is a drug I cannot live without.”</i> ~ <b>Cecil B. DeMille</b>',
+'<i>“One can have no smaller or greater mastery than mastery of oneself.”</i> ~ <b>Leonardo da Vinci</b>',
+'<i>“Colour is my day-long obsession, joy and torment.”</i> ~ <b>Claude Monet</b>',
+'<i>“The greatest respect an artist can pay to music is to give it life.”</i> ~ <b>Pablo Casals</b>',
+'<i>“The music is not in the notes, but in the silence between.”</i> ~ <b>Wolfgang Amadeus Mozart</b>',
+'<i>“If I create from the heart, nearly everything works; if from the head, almost nothing.”</i> ~ <b>Marc Chagall</b>',
+'<i>I never paint dreams or nightmares. I paint my own reality.”</i> ~ <b>Frida Kahlo</b>'
+]
 
 
 @app.route('/')
@@ -50,12 +59,12 @@ def index():
 @app.route('/index')
 def index2():
     """Show our index page."""
-    user_id = session['user_id']
+    
     # check to see if user is logged in
-
+    user_id = session.get('user_id')
 
     # if not display the index page
-
+    print(user_id)
     # if there is a user_id in session
     # display the user profile page?
     return render_template('index.html')
@@ -286,7 +295,7 @@ def update_inventory(inv_id):
     user = User.query.get(user_id)
 
     inventory = user.inventory
-
+    print(request.form)
 
     #get info from the db on the item
     inv_item = Inventory.query.get(inv_id)
@@ -294,6 +303,7 @@ def update_inventory(inv_id):
     # and run the query to update it
     # NOTE TO SELF: will need to add picture path later
     inv_item.inv_name = request.form['inv_name']
+    inv_item.inv_type = request.form['inv_type']
     inv_item.description = request.form['description']
     inv_item.price = request.form['price']
     inv_item.count_per_package = request.form['count_per_package']
@@ -481,10 +491,34 @@ def search():
     print("request.form.get('search_text')= ", search_text)
     user_id = session['user_id']
     user = User.query.get(user_id) 
-    results = user.search_keywords(search_text)
-    print(results)
+    project_matches = user.projects.query.filter_by(keywords=search_text)
+    # results = user.projects.search_keywords(search_text)
+    # print(results)
+    print(project_matches)
+
+    ####
+    NOTE
+    ####
+    # this needs to be equiv to like '%<search_text>%'  NOT ==
+    inv_matches = user.inventory.query.filter_by(keywords=search_text)
+    print(inv_matches)
+
+    #combine the two bits of info, jsonify it, and return to page to be displayed
 
     return render_template('search.html')
+
+@app.route('/start_scan')
+def scan():
+    """Display the scan form"""
+    return render_template('scan.html')
+
+@app.route('/get_quote')
+def return_quote():
+    # TO DO:
+    # Implment using a sep util to read quote file and get random quote
+    # return the quote
+    print("GETTING HERE"*20)
+    return random.choice(QUOTES)
 
 
 if __name__ == "__main__":
