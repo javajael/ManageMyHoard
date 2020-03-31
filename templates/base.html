@@ -15,30 +15,51 @@
 <title>{% block title %}{% endblock %}</title>
 <body> 
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark form-inline" style="background-color: #e8bd3a;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark form-inline" style="background-color: #6F9495;">
       <!-- <form class="form-inline"> -->
         <a class="navbar-brand navbar-header" href="/">
           <img src="/static/img/mmh2-sm-logo.png" width="30" height="30" alt="Manage My Hoard">
         </a>
         <div class="navbar-brand">MMH</div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-         
-            <a class="nav-item nav-link active" 
-               href="/user">Profile<span 
-               class="sr-only">(current)</span>
-            </a>
-            <a class="nav-item nav-link" href="/inventory">Inventory</a>
-            <a class="nav-item nav-link" href="/projects">Projects</a>
-            <a class="nave-item nav-link" href="/search_form">Search</a>
-            <a class="nave-item nav-link" href="/start_scan">Scan</a>
+          <ul>
+            
             {% if not session.get('user_id') %}
-              <a class="nav-item nav-link" href="/login_form">Login</a>
-              
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="/login_form">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="/register">Register</a>
+              </li>
             {% else %}
-              <a class="nave-item nav-link" href="/logout" >Logout</a>
+              <li class="nav-item active">
+                <a class="nav-item nav-link active" 
+                   href="/user">Profile
+                   
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="/inventory">Inventory</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="/projects">Projects</a>
+              </li>
+              <li class="nav-item">
+                <a class="nave-item nav-link" href="/search_form">Search</a>
+              </li>
+              <li class="nav-item">
+                <a class="nave-item nav-link" href="/start_scan">Scan</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nave-item nav-link" href="/logout" >Logout</a>
+              </li>
             
             {% endif %}
-         
+          </ul>
         </div>  
       <!-- </form> -->
     </nav>

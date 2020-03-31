@@ -9,6 +9,10 @@
   overflow: hidden;
 }
 */
+body {
+ background-image:  url('../img/scale.png');
+ background-color: #f7f4f2;
+}
 div.navbar-header img {
     width: 30px;
     float: left;
@@ -28,6 +32,36 @@ img.mmh-logo-lg {
     height: 150px;
 }
 
+ul {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #6F9495;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+  background-color: #b4cbca;
+  color: white;
+}
+/* Overide bootstrap for button display*/
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #9BC5C1 !important;
+}
 
 /* login form */
 
@@ -68,4 +102,13 @@ display: table-row-group;
 }
 .table-body-cell{
 display: table-cell;
+}
+
+/* Styling for webcamcamjs scan.html page
+Source https://makitweb.com/how-to-capture-picture-from-webcam-with-webcam-js/ */
+
+#my_camera{
+ width: 320px;
+ height: 240px;
+ border: 1px solid black;
 }

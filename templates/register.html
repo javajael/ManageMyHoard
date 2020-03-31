@@ -2,6 +2,18 @@
 {% block title %}
 Register
 {% endblock %}
+{% block script %}
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lf5C-UUAAAAAEMBKC1f7EKHKp_abYFW0963D7Jt"></script>
+    <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6Lf5C-UUAAAAAEMBKC1f7EKHKp_abYFW0963D7Jt',
+          {action: 'homepage'}).then(function(token) {
+           console.log(token);
+        });
+    });
+    </script>
+</script>
+{% endblock %}
 {% block body %}
 <h2 class="register-heading">Please fill in each field</h2>
 <form class="register" action="new_user" method="POST">
@@ -31,9 +43,11 @@ Register
     <input type="password" name="password" class="form-control">
   </div>
 
+  <div class="g-recaptcha" data-sitekey="6Lf5C-UUAAAAAEMBKC1f7EKHKp_abYFW0963D7Jt"></div>
+  <br/>
+
   <div>
     <button class="btn btn-primary" type="submit">Submit</button>
-  </div>
-
+  </div>  
 </form>
 {% endblock %}

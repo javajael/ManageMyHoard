@@ -12,20 +12,21 @@ Homepage
   <hr>
 
   <div>
-    <form action="/register">
-      <button class="btn btn-primary" type="submit">Register</button>
-    </form>
-  
-    <hr>
-  
-    <form action="/login_form">
-     <button class="btn btn-primary" type="submit">Log In</button>
-    </form>
-
+    {% if not session.get('user_id') %}
+      <form action="/register">
+        <button class="btn btn-primary" type="submit">Register</button>
+      </form>
+    
+      <hr>
+    
+      <form action="/login_form">
+       <button class="btn btn-primary" type="submit">Log In</button>
+      </form>
+    {% endif %}
   </div>  
 </div>
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="/static/show_projects.js"></script>
+
 {% endblock %}
 
 
