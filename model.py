@@ -63,18 +63,18 @@ class User(ModelMixin, db.Model):
         """Function to return the projects for a user that are in progress
            ie. their status='i'
         """
-        ip_projects = db.session.query(Project.project_id,
-                                           Project.user_id,
-                                           Project.proj_name,
-                                           Project.status,
-                                           Project.description).filter(Project.user_id == self.user_id)
+        projects = Project.query.filter(Project.user_id == self.user_id)
+        ip_projects = projects.filter(Project.status == "i").all()
         return ip_projects
 
     def search_keywords(self, search_parms):
-        search_on = "\'%"+search_parms+"%\'"
-        matches = db.session.query(Inventory.inv_id,
-                                   Inventory.inv_name,
-                                   Inventory.keywords).filter(Inventory.user_id == self.user_id and Inventory.keywords.like(search_on))
+        """Function to search the user's iventory for a match on the 
+        search parameters in the keywords column"""
+        #get the rows in inventory that match based on the current user_id
+        user_inv = Inventory.query.filter(Inventory.user_id == self.user_id)
+        # filter out - get the inv item rows that match the search parms
+        matches = user_inv.filter(Inventory.keywords.like(f"%{search_parms}%")).all()
+        return matches
     
 
 
@@ -119,7 +119,7 @@ class Inventory(ModelMixin, db.Model):
             "user_id": self.user_id,
             "inv_name":self.name,
             "inv_type": self.inv_type,
-            "description": self.descrption,
+            "description": self.description,
             "price": self.price,
             "count_per_package": self.count_per_package,
             "manufacturer": self.manufacturer,

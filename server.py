@@ -491,21 +491,16 @@ def search():
     print("request.form.get('search_text')= ", search_text)
     user_id = session['user_id']
     user = User.query.get(user_id) 
-    project_matches = user.projects.query.filter_by(keywords=search_text)
-    # results = user.projects.search_keywords(search_text)
-    # print(results)
-    print(project_matches)
+    print("USER ID FROM FORM: ",user_id)
+    # project_matches = user.projects.query.filter_by(keywords=search_text)
+    inv_results = user.search_keywords(search_text)
+    print("RESULTS:",inv_results)
+    # print(project_matches)
 
-    ####
-    NOTE
-    ####
-    # this needs to be equiv to like '%<search_text>%'  NOT ==
-    inv_matches = user.inventory.query.filter_by(keywords=search_text)
-    print(inv_matches)
+    
 
     #combine the two bits of info, jsonify it, and return to page to be displayed
-
-    return render_template('search.html')
+    return render_template('search.html', inventory=inv_results)
 
 @app.route('/start_scan')
 def scan():
@@ -517,7 +512,7 @@ def return_quote():
     # TO DO:
     # Implment using a sep util to read quote file and get random quote
     # return the quote
-    print("GETTING HERE"*20)
+    
     return random.choice(QUOTES)
 
 
