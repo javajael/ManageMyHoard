@@ -13,23 +13,55 @@ body {
  background-image:  url('../img/scale.png');
  background-color: #f7f4f2;
 }
+div{
+  max-width: 970px;
+}
+div.container {
+  max-width: 970px;
+  align-content: center;
+}
+label {
+  color:  #43296e;
+}
 div.navbar-header img {
-    width: 30px;
-    float: left;
-    margin-top: 7px;
-    margin-right: 7px;
+  width: 30px;
+  float: left;
+  margin-top: 7px;
+  margin-right: 7px;
+    
+}
+nav {
+  color:  #43296e;
+}
+nav.nav-item {
+  color:  #43296e;
+}
+a.nav-link {
+  color:  #43296e;
 }
 
 img.mmh-logo-xs {
-    height: 15px;
+  height: 15px;
+  border-radius: 50%;quotes: 
+  border: 1px #43296e;
+}
+
+img.mmh-logo-s {
+  height: 30px;
+  border-radius: 50%;quotes: 
+  border: 1px #43296e;
 }
 
 img.mmh-logo-m {
-    height: 100px;
+  height: 100px;
+  border-radius: 50%;quotes: 
+  border: 5px #43296e;
+
 }
 
 img.mmh-logo-lg {
-    height: 150px;
+  height: 150px;
+  border: 1px;
 }
 
 ul {
@@ -77,31 +109,31 @@ display: table;
 }
 
 .resp-table-title{
-display: table-caption;
-text-align: center;
-font-weight: bold;
-font-size: larger;
+  display: table-caption;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
 }
 
 #resp-table-header{
-display: table-header-group;
-background-color: gray;
-font-weight: bold;
-font-size: 15px;
+  display: table-header-group;
+  background-color: gray;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .table-header-cell{
-display: table-cell;
-padding: 10px;
-text-align: justify;
-border-bottom: 1px solid black;
+  display: table-cell;
+  padding: 10px;
+  text-align: justify;
+  border-bottom: 1px solid black;
 }
 
 #resp-table-body{
-display: table-row-group;
+  display: table-row-group;
 }
 .table-body-cell{
-display: table-cell;
+  display: table-cell;
 }
 
 /* Styling for webcamcamjs scan.html page
@@ -111,4 +143,31 @@ Source https://makitweb.com/how-to-capture-picture-from-webcam-with-webcam-js/ *
  width: 320px;
  height: 240px;
  border: 1px solid black;
+}
+
+h1{
+  color: #6F9495;
+}
+h2{
+  color: #6F9495;
+}
+h3{
+  color: #6F9495;
+}
+p{
+  color: #6F9495;
+}
+div.card-body{
+  background-color: #f0f5f4;
+}
+
+/*div.card-body{
+  background-color: #e1eaea;
+}*/
+
+
+
+h1.card-title{
+  color: #6F9495;
+  align-content: center;
 }

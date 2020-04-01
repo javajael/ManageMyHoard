@@ -3,19 +3,21 @@
 Register
 {% endblock %}
 {% block script %}
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lf5C-UUAAAAAEMBKC1f7EKHKp_abYFW0963D7Jt"></script>
-    <script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lf5C-UUAAAAAEMBKC1f7EKHKp_abYFW0963D7Jt">
+  </script>
+  <script>
     grecaptcha.ready(function() {
-        grecaptcha.execute('6Lf5C-UUAAAAAEMBKC1f7EKHKp_abYFW0963D7Jt',
+      grecaptcha.execute('6Lf5C-UUAAAAAEMBKC1f7EKHKp_abYFW0963D7Jt',
           {action: 'homepage'}).then(function(token) {
            console.log(token);
-        });
+      });
     });
-    </script>
+  </script>
 </script>
 {% endblock %}
 {% block body %}
-<h2 class="register-heading">Please fill in each field</h2>
+<h2>New User Registration</h2>
+<p>Please fill out every field</p>
 <form class="register" action="new_user" method="POST">
 
   <div class="form-group">      
