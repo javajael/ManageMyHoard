@@ -15,6 +15,7 @@ body {
 }
 div{
   max-width: 970px;
+  padding: 5px;
 }
 div.container {
   max-width: 970px;
@@ -31,13 +32,13 @@ div.navbar-header img {
     
 }
 nav {
-  color:  #43296e;
+  color: #43296e;
 }
 nav.nav-item {
-  color:  #43296e;
+  color: #43296e;
 }
 a.nav-link {
-  color:  #43296e;
+  color: #43296e;
 }
 
 img.mmh-logo-xs {
@@ -94,6 +95,10 @@ li a:hover {
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #9BC5C1 !important;
 }
+blockquote {
+  color: #6F9495;
+
+}
 
 /* login form */
 
@@ -135,7 +140,13 @@ display: table;
 .table-body-cell{
   display: table-cell;
 }
+th {
+  color: #43296e;
+}
 
+td {
+  color: #43296e;
+}
 /* Styling for webcamcamjs scan.html page
 Source https://makitweb.com/how-to-capture-picture-from-webcam-with-webcam-js/ */
 

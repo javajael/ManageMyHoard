@@ -6,15 +6,15 @@ Inventory
 <div class="container">
 <h2 class="inventory-heading">Inventory</h2>
   <form class="inventory" method="POST">
-    <table class="table table-hover">
+    <table class="table table-hover" style="overflow-x:auto;">
       <h3>Tools</h3>
         
           <tr class="table-row">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Price</th>
-            <th>Amt/Pkg</th>
+            <th style="color:#43296e">ID</th>
+            <th style="color:#43296e">Name</th>
+            <th style="color:#43296e">Size</th>
+            <th style="color:#43296e">Price</th>
+            <th style="color:#43296e">Amt/Pkg</th>
           </tr>
             {% for inv_item in inventory %}
               {% if inv_item.inv_type == 't' %}
@@ -32,23 +32,23 @@ Inventory
       </table>
       <div><br></div>
 
-  <table class="table">
+  <table class="table table-hover">
     <h3>Supplies</h3>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Price</th>
-            <th>Amt/Pkg</th>
+            <th style="color:#43296e">ID</th>
+            <th style="color:#43296e">Name</th>
+            <th style="color:#43296e">Size</th>
+            <th style="color:#43296e">Price</th>
+            <th style="color:#43296e">Amt/Pkg</th>
           </tr>
           {% for inv_item in inventory %}
             {% if inv_item.inv_type == 's' %}
               <tr>
-                <td><a href="/view_inv_item/{{ inv_item.inv_id}}">{{ inv_item.inv_id}}</a></td>
-                <td>{{ inv_item.inv_name }}</td>
-                <td>{{ inv_item.size }}</td>
-                <td>{{ inv_item.price }}</td>
-                <td>{{inv_item.count_per_package}}</td>
+                <td style="color:#43296e"><a href="/view_inv_item/{{ inv_item.inv_id}}">{{ inv_item.inv_id}}</a></td>
+                <td style="color:#43296e">{{ inv_item.inv_name }}</td>
+                <td style="color:#43296e">{{ inv_item.size }}</td>
+                <td style="color:#43296e">{{ inv_item.price }}</td>
+                <td style="color:#43296e">{{inv_item.count_per_package}}</td>
               </tr>
             {% endif %}
             

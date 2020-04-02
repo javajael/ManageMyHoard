@@ -26,13 +26,13 @@ app.jinja_env.auto_reload = True
 #app.secret_key = 'ABC'
 
 QUOTES = [
-'<i>“Creativity is a drug I cannot live without.”</i> ~ <b>Cecil B. DeMille</b>',
-'<i>“One can have no smaller or greater mastery than mastery of oneself.”</i> ~ <b>Leonardo da Vinci</b>',
-'<i>“Colour is my day-long obsession, joy and torment.”</i> ~ <b>Claude Monet</b>',
-'<i>“The greatest respect an artist can pay to music is to give it life.”</i> ~ <b>Pablo Casals</b>',
-'<i>“The music is not in the notes, but in the silence between.”</i> ~ <b>Wolfgang Amadeus Mozart</b>',
-'<i>“If I create from the heart, nearly everything works; if from the head, almost nothing.”</i> ~ <b>Marc Chagall</b>',
-'<i>I never paint dreams or nightmares. I paint my own reality.”</i> ~ <b>Frida Kahlo</b>'
+    '<blockquote class="blockquote">“Creativity is a drug I cannot live without.”</blockquote><footer class="blockquote-footer">Cecil B. DeMille</footer>',
+'<blockquote class="blockquote">“One can have no smaller or greater mastery than mastery of oneself.”</blockquote><footer class="blockquote-footer">Leonardo da Vinci</footer>',
+'<blockquote class="blockquote">“Colour is my day-long obsession, joy and torment.”</blockquote><footer class="blockquote-footer">Claude Monet</footer>',
+'<blockquote class="blockquote">“The greatest respect an artist can pay to music is to give it life.”</blockquote><footer class="blockquote-footer">Pablo Casals</footer>',
+'<blockquote class="blockquote">“The music is not in the notes, but in the silence between.”</blockquote><footer class="blockquote-footer">Wolfgang Amadeus Mozart</footer>',
+'<blockquote class="blockquote">“If I create from the heart, nearly everything works; if from the head, almost nothing.”</blockquote><footer class="blockquote-footer">Marc Chagall</footer>',
+'<blockquote class="blockquote">I never paint dreams or nightmares. I paint my own reality.”</blockquote><footer class="blockquote-footer">Frida Kahlo</footer>'
 ]
 
 
