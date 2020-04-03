@@ -493,14 +493,15 @@ def search():
     user = User.query.get(user_id) 
     print("USER ID FROM FORM: ",user_id)
     # project_matches = user.projects.query.filter_by(keywords=search_text)
-    inv_results = user.search_keywords(search_text)
+    inv_results = user.search_inv_keywords(search_text)
     print("RESULTS:",inv_results)
     # print(project_matches)
+    proj_results = user.search_proj_keywords(search_text)
 
     
 
     #combine the two bits of info, jsonify it, and return to page to be displayed
-    return render_template('search.html', inventory=inv_results)
+    return render_template('search.html', inventory=inv_results, projects=proj_results)
 
 @app.route('/start_scan')
 def scan():

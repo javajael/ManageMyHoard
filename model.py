@@ -67,13 +67,23 @@ class User(ModelMixin, db.Model):
         ip_projects = projects.filter(Project.status == "i").all()
         return ip_projects
 
-    def search_keywords(self, search_parms):
+    def search_inv_keywords(self, search_parms):
         """Function to search the user's iventory for a match on the 
         search parameters in the keywords column"""
         #get the rows in inventory that match based on the current user_id
         user_inv = Inventory.query.filter(Inventory.user_id == self.user_id)
         # filter out - get the inv item rows that match the search parms
         matches = user_inv.filter(Inventory.keywords.like(f"%{search_parms}%")).all()
+        return matches
+
+
+    def search_proj_keywords(self, search_parms):
+        """Function to search the user's iventory for a match on the 
+        search parameters in the keywords column"""
+        #get the rows in inventory that match based on the current user_id
+        user_proj = Project.query.filter(Project.user_id == self.user_id)
+        # filter out - get the inv item rows that match the search parms
+        matches = user_proj.filter(Project.keywords.like(f"%{search_parms}%")).all()
         return matches
     
 
