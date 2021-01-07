@@ -23,7 +23,7 @@ Jinja2==2.11.1
 Kivy==1.11.1
 Kivy-Garden==0.1.4
 kiwisolver==1.1.0
-lxml==4.5.0
+lxml==4.6.2
 MarkupSafe==1.1.1
 matplotlib==3.2.1
 numpy==1.18.1
